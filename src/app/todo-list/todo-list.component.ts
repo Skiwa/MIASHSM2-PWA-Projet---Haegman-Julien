@@ -20,15 +20,26 @@ export class TodoListComponent implements OnInit {
   private filter:String = 'all';  //Current filter: 'all', 'actives', 'completed'
 
   constructor(private todoService: TodoService) {
+    //Loads the stored todolist
+    this.loadTodoList();
+
     //Update data each time the todolist changes
-    todoService.getTodoListDataObserver().subscribe(todolist=>{
+    this.todoService.getTodoListDataObserver().subscribe(todolist=>{
+      //Retrieve the todolist data
       this.data = todolist;
       this.titre = todolist.label;
-      console.log("updated todolist : ", todolist);
+
+      //Save the todolist in local storage
+      this.saveTodoList();
+
+      console.log("Updated todolist", todolist);
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+
+  }
 
   /**
    * Adds a new item to the list
@@ -122,7 +133,27 @@ export class TodoListComponent implements OnInit {
     return false;
   }
 
+  /**
+   * Loads the todolist in localstorage
+   */
+  loadTodoList(){
+    let localList:TodoListData = JSON.parse(localStorage.getItem('todolist'));
+
+    console.log("Loaded todolist from local storage", localList);
+
+    this.todoService.setItemsLabel(localList.label);
+    localList.items.forEach(item=>{
+      this.todoService.appendItems(item);
+    });
+  }
   
+  /**
+   * Save the todolist in localstorage
+   */
+  saveTodoList(){
+    localStorage.setItem('todolist', JSON.stringify(this.data));
+  }
+
   get label(): string {
     return this.data ? this.data.label : '';
   }
