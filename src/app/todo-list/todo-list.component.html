@@ -59,4 +59,4 @@
 </section>
 <hr/>
 
-<canvas id="canvas"></canvas>
+<app-qr-code [todolist] = "data" (qrcodeUploaded)="loadTodoListQRCode($event)"></app-qr-code>

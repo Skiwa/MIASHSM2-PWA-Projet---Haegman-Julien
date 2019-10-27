@@ -20,6 +20,7 @@ button {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   font-smoothing: antialiased;
+  cursor: pointer;
 }
 
 body {
@@ -338,7 +339,6 @@ html .clear-completed:active {
   position: relative;
   line-height: 20px;
   text-decoration: none;
-  cursor: pointer;
   position: relative;
 }
 
@@ -362,6 +362,21 @@ html .clear-completed:active {
 
 .info a:hover {
   text-decoration: underline;
+}
+
+
+  
+.action {
+  background-color: #ee6e73;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 
 
