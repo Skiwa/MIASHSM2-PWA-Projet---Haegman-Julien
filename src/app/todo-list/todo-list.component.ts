@@ -1,9 +1,8 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit, ViewChild, Output, EventEmitter} from '@angular/core';
 import {TodoListData} from '../dataTypes/TodoListData';
 import {TodoItemData} from '../dataTypes/TodoItemData';
 import {TodoService} from '../todo.service';
 import { of } from 'rxjs';
-import QRCode from 'qrcode';
 
 @Component({
   selector: 'app-todo-list',
@@ -16,23 +15,17 @@ export class TodoListComponent implements OnInit {
   @Input() 
   @ViewChild('newTodoInput', {static:false}) todoInput:any;
 
-  private data: TodoListData;     //Current list
+  public data: TodoListData;     //Current list
   private titre: String;          //Title
   private filter:String = 'all';  //Current filter: 'all', 'actives', 'completed'
-  private QRCanvas:HTMLElement;
 
   constructor(private todoService: TodoService) {
-
-
   }
 
   ngOnInit() {
 
-    //Stores the QR canvas element
-    this.QRCanvas = document.getElementById('canvas');
-
     //Loads the stored todolist
-    this.loadTodoList();
+    this.loadTodoListLocal();
 
     //Update data each time the todolist changes
     this.todoService.getTodoListDataObserver().subscribe(todolist=>{
@@ -41,10 +34,8 @@ export class TodoListComponent implements OnInit {
       this.titre = todolist.label;
 
       //Save the todolist in local storage
-      this.saveTodoList();
+      this.saveTodoListLocal();
 
-      //Regen QR code
-      this.regenQRCode();
     });
   }
 
@@ -143,11 +134,8 @@ export class TodoListComponent implements OnInit {
   /**
    * Loads the todolist in localstorage
    */
-  loadTodoList(){
+  loadTodoListLocal(){
     let localList:TodoListData = JSON.parse(localStorage.getItem('todolist'));
-
-    console.log("Loaded todolist from local storage", localList);
-
     this.todoService.setItemsLabel(localList.label);
     localList.items.forEach(item=>{
       this.todoService.appendItems(item);
@@ -157,15 +145,23 @@ export class TodoListComponent implements OnInit {
   /**
    * Save the todolist in localstorage
    */
-  saveTodoList(){
+  saveTodoListLocal(){
     localStorage.setItem('todolist', JSON.stringify(this.data));
   }
 
   /**
-   * Regenerate the QR code
+   * Load the todolist from decoded qrcode
+   * @param todolist 
    */
-  regenQRCode(){
-    QRCode.toCanvas(this.QRCanvas, JSON.stringify(this.data));
+  loadTodoListQRCode(todolist:TodoListData){
+    //Clear the current todolist
+    this.removeAllItems();
+
+    //Import the new one
+    this.todoService.setItemsLabel(todolist.label);
+    todolist.items.forEach(item=>{
+      this.todoService.appendItems(item);
+    });
   }
 
   get label(): string {
