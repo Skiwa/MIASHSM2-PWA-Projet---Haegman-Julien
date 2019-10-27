@@ -3,6 +3,7 @@ import {TodoListData} from '../dataTypes/TodoListData';
 import {TodoItemData} from '../dataTypes/TodoItemData';
 import {TodoService} from '../todo.service';
 import { of } from 'rxjs';
+import QRCode from 'qrcode';
 
 @Component({
   selector: 'app-todo-list',
@@ -18,8 +19,18 @@ export class TodoListComponent implements OnInit {
   private data: TodoListData;     //Current list
   private titre: String;          //Title
   private filter:String = 'all';  //Current filter: 'all', 'actives', 'completed'
+  private QRCanvas:HTMLElement;
 
   constructor(private todoService: TodoService) {
+
+
+  }
+
+  ngOnInit() {
+
+    //Stores the QR canvas element
+    this.QRCanvas = document.getElementById('canvas');
+
     //Loads the stored todolist
     this.loadTodoList();
 
@@ -32,13 +43,9 @@ export class TodoListComponent implements OnInit {
       //Save the todolist in local storage
       this.saveTodoList();
 
-      console.log("Updated todolist", todolist);
+      //Regen QR code
+      this.regenQRCode();
     });
-  }
-
-  ngOnInit() {
-    
-
   }
 
   /**
@@ -152,6 +159,13 @@ export class TodoListComponent implements OnInit {
    */
   saveTodoList(){
     localStorage.setItem('todolist', JSON.stringify(this.data));
+  }
+
+  /**
+   * Regenerate the QR code
+   */
+  regenQRCode(){
+    QRCode.toCanvas(this.QRCanvas, JSON.stringify(this.data));
   }
 
   get label(): string {
