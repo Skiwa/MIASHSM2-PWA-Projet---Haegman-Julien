@@ -10,10 +10,18 @@ export class TodoService {
 
   constructor() { }
 
+  /**
+   * Returns the list as an Observable
+   * @returns Observable
+   */
   getTodoListDataObserver(): Observable<TodoListData> {
     return this.todoListSubject.asObservable();
   }
 
+  /**
+  * @param  {string} label
+  * @param  {TodoItemData[]} ...items
+  */
   setItemsLabel(label: string, ...items: TodoItemData[] ) {
     const tdl = this.todoListSubject.getValue();
     this.todoListSubject.next( {
@@ -22,6 +30,10 @@ export class TodoService {
     });
   }
 
+  /**
+   * @param  {boolean} isDone
+   * @param  {TodoItemData[]} ...items
+   */
   setItemsDone(isDone: boolean, ...items: TodoItemData[] ) {
     const tdl = this.todoListSubject.getValue();
     this.todoListSubject.next( {
@@ -29,7 +41,10 @@ export class TodoService {
       items: tdl.items.map( I => items.indexOf(I) === -1 ? I : ({label: I.label, isDone}) )
     });
   }
-
+  
+  /**
+   * @param  {TodoItemData[]} ...items
+   */
   appendItems( ...items: TodoItemData[] ) {
     const tdl = this.todoListSubject.getValue();
     this.todoListSubject.next( {
@@ -37,7 +52,10 @@ export class TodoService {
       items: [...tdl.items, ...items]
     });
   }
-
+  
+  /**
+   * @param  {TodoItemData[]} ...items
+   */
   removeItems( ...items: TodoItemData[] ) {
     const tdl = this.todoListSubject.getValue();
     this.todoListSubject.next( {

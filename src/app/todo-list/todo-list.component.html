@@ -1,12 +1,14 @@
 <section class="todoapp">
   <header class="header">
     <h1>{{titre}}</h1>
-    <form>
+    <!-- Call appendItem with the new item name when is added -->
+    <form (submit)="appendItem(newTodoInput.value)">
       <input  #newTodoInput
               name        = "newTodoInput"
               class       = "new-todo"
               placeholder = "Que faire?"
-              autofocus />
+              autofocus
+              />
     </form>
   </header>
   <section class="main">
@@ -15,22 +17,38 @@
             name="toggleAll"
     />
     <ul class="todo-list">
+      <!-- Loops through items and checks if is in the filters -->
+      <ng-container *ngFor="let item of data.items">
+        <app-todo-item 
+        *ngIf="isItemShown(item)"
+        [item]="item"
+        (checkAction)="checkItem($event)"
+        (removeAction)="removeItem($event)"
+        ></app-todo-item>
+      </ng-container>
     </ul>
   </section>
   <footer class="footer">
-    <span class="todo-count"><strong></strong> restantes</span>
+    <span class="todo-count"><strong>{{countItemsLeft()}}</strong> restantes</span>
     <ul class="filters">
       <li>
-        <a class="filterAll">Tous</a>
+        <a 
+          class="filterAll" 
+          (click)="setFilter('all')"
+          [class.selected]="filter === 'all'">Tous</a>
       </li>
       <li>
-        <a class="filterActives">Actifs</a>
+        <a 
+          class="filterActives" 
+          (click)="setFilter('actives')"
+          [class.selected]="filter === 'actives'">Actifs</a>
       </li>
       <li>
-        <a class="filterCompleted">Complétés</a>
+        <a class="filterCompleted" (click)="setFilter('completed')"
+        [class.selected]="filter === 'completed'">Complétés</a>
       </li>
     </ul>
-    <button class="clear-completed">Supprimer cochées</button>
+    <button class="clear-completed" (click)="removeCheckedItems()">Supprimer cochées</button>
   </footer>
 </section>
 <hr/>

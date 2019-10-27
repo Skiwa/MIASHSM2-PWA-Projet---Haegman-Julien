@@ -1,4 +1,6 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, Input, Output} from '@angular/core';
+import { TodoItemData } from '../dataTypes/TodoItemData';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-todo-item',
@@ -8,9 +10,14 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 })
 export class TodoItemComponent implements OnInit {
 
+@Input() item:TodoItemData;                   //curent item
+@Output() checkAction = new EventEmitter();   //event emitted when item is checked
+@Output() removeAction = new EventEmitter();  //event emitted when item is deleted
+
+public showEdit:boolean = false;  //true: show the edit input
+
   constructor() { }
 
   ngOnInit() {
   }
-
 }
