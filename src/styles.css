@@ -327,8 +327,19 @@ html .clear-completed:active {
   position: relative;
 }
 
-.clear-completed:hover {
+.clear-button:hover {
   text-decoration: underline;
+}
+
+.clear-button{
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  position: relative;
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
 }
 
 .info {

@@ -29,26 +29,32 @@
     </ul>
   </section>
   <footer class="footer">
-    <span class="todo-count"><strong>{{countItemsLeft()}}</strong> restantes</span>
-    <ul class="filters">
-      <li>
-        <a 
-          class="filterAll" 
-          (click)="setFilter('all')"
-          [class.selected]="filter === 'all'">Tous</a>
-      </li>
-      <li>
-        <a 
-          class="filterActives" 
-          (click)="setFilter('actives')"
-          [class.selected]="filter === 'actives'">Actifs</a>
-      </li>
-      <li>
-        <a class="filterCompleted" (click)="setFilter('completed')"
-        [class.selected]="filter === 'completed'">Complétés</a>
-      </li>
-    </ul>
-    <button class="clear-completed" (click)="removeCheckedItems()">Supprimer cochées</button>
+
+    <div style="display:block">
+      <span class="todo-count"><strong>{{countItemsLeft()}}</strong> restantes</span>
+      <ul class="filters">
+        <li>
+          <a 
+            class="filterAll" 
+            (click)="setFilter('all')"
+            [class.selected]="filter === 'all'">Tous</a>
+        </li>
+        <li>
+          <a 
+            class="filterActives" 
+            (click)="setFilter('actives')"
+            [class.selected]="filter === 'actives'">Actifs</a>
+        </li>
+        <li>
+          <a class="filterCompleted" (click)="setFilter('completed')"
+          [class.selected]="filter === 'completed'">Complétés</a>
+        </li>
+      </ul>
+    </div>
   </footer>
+  <div class="footer">
+      <button class="clear-button" (click)="removeAllItems()">Tout supprimer</button>
+      <button class="clear-button" (click)="removeCheckedItems()">Supprimer cochées</button>
+    </div>
 </section>
 <hr/>

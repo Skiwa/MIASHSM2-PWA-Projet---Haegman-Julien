@@ -6,7 +6,7 @@
 - [ ] Undo / Redo (Annuler / Refaire)
 - [ ] Version responsive (application qui s'adapte aux tailles d'écran, comme un
 smartphone)
-- [ ] Effacer Tout
+- [x] Effacer Tout
 - [ ] Passage à une Progressive Web App (PWA) via les technologies standards
 - [ ] Utilisation de reconnaissance vocale
 - [ ] Ajout de notes de types images / vidéos / sons / dessins ...

@@ -78,6 +78,15 @@ export class TodoListComponent implements OnInit {
   }
 
   /**
+   * Remove every item
+   */
+  removeAllItems(){
+    this.data.items.forEach(item=>{
+      this.todoService.removeItems(item);
+    });
+  }
+
+  /**
    * Returns the number of items left todo
    * @returns number count
    */
