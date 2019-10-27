@@ -2,7 +2,7 @@
 
 ## Fonctionnalités
 
-- [ ] Sérialisation / désérialisation des données localement (Local Storage) - Pour sauvegarder les données localement
+- [x] Sérialisation / désérialisation des données localement (Local Storage) - Pour sauvegarder les données localement
 - [ ] Undo / Redo (Annuler / Refaire)
 - [ ] Version responsive (application qui s'adapte aux tailles d'écran, comme un
 smartphone)
