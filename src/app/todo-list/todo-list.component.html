@@ -58,3 +58,5 @@
     </div>
 </section>
 <hr/>
+
+<app-qr-code [todolist] = "data" (qrcodeUploaded)="loadTodoListQRCode($event)"></app-qr-code>
