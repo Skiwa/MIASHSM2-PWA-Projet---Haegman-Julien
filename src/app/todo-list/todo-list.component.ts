@@ -173,7 +173,7 @@ export class TodoListComponent implements OnInit {
    */
   loadTodoListQRCode(todolist:TodoListData){
     //Clear the current todolist
-    this.removeAllItems();
+    this.todoService.removeAllItems();
 
     //Import the new one
     this.todoService.setItemsLabel(todolist.label);
