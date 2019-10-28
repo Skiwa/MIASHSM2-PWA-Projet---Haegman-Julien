@@ -1,8 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit, ViewChild, Output, EventEmitter} from '@angular/core';
 import {TodoListData} from '../dataTypes/TodoListData';
 import {TodoItemData} from '../dataTypes/TodoItemData';
 import {TodoService} from '../todo.service';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -15,13 +14,20 @@ export class TodoListComponent implements OnInit {
   @Input() 
   @ViewChild('newTodoInput', {static:false}) todoInput:any;
 
-  private data: TodoListData;     //Current list
+  public data: TodoListData;      //Current list
   private titre: String;          //Title
   private filter:String = 'all';  //Current filter: 'all', 'actives', 'completed'
 
   constructor(private todoService: TodoService) {
+  }
+
+  ngOnInit() {
+
     //Loads the stored todolist
-    this.loadTodoList();
+    this.loadTodoListLocal();
+
+    //Save the initial state in the history list
+    this.todoService.saveListInHistory();
 
     //Update data each time the todolist changes
     this.todoService.getTodoListDataObserver().subscribe(todolist=>{
@@ -30,15 +36,8 @@ export class TodoListComponent implements OnInit {
       this.titre = todolist.label;
 
       //Save the todolist in local storage
-      this.saveTodoList();
-
-      console.log("Updated todolist", todolist);
+      this.saveTodoListLocal();
     });
-  }
-
-  ngOnInit() {
-    
-
   }
 
   /**
@@ -52,6 +51,9 @@ export class TodoListComponent implements OnInit {
 
       //Clear the input
       this.clearInput();
+
+      //Save the state in the history list
+      this.todoService.saveListInHistory();
     }
   }
 
@@ -68,6 +70,9 @@ export class TodoListComponent implements OnInit {
    */
   checkItem(item: TodoItemData){
     this.todoService.setItemsDone(!item.isDone, item);
+
+    //Save the state in the history list
+    this.todoService.saveListInHistory();
   }
 
   /**
@@ -75,6 +80,9 @@ export class TodoListComponent implements OnInit {
    */
   removeItem(item: TodoItemData){
     this.todoService.removeItems(item);
+
+    //Save the state in the history list
+    this.todoService.saveListInHistory();
   }
 
   /**
@@ -85,16 +93,21 @@ export class TodoListComponent implements OnInit {
       if(item.isDone){
         this.todoService.removeItems(item);
       }
-    })
+    });
+
+    //Save the state in the history list
+    this.todoService.saveListInHistory();
+
   }
 
   /**
    * Remove every item
    */
   removeAllItems(){
-    this.data.items.forEach(item=>{
-      this.todoService.removeItems(item);
-    });
+    this.todoService.removeAllItems();
+
+    //Save the state in the history list
+    this.todoService.saveListInHistory();
   }
 
   /**
@@ -136,22 +149,70 @@ export class TodoListComponent implements OnInit {
   /**
    * Loads the todolist in localstorage
    */
-  loadTodoList(){
+  loadTodoListLocal(){
     let localList:TodoListData = JSON.parse(localStorage.getItem('todolist'));
-
-    console.log("Loaded todolist from local storage", localList);
-
     this.todoService.setItemsLabel(localList.label);
     localList.items.forEach(item=>{
       this.todoService.appendItems(item);
     });
+
+    //Save the state in the history list
+    this.todoService.saveListInHistory();
   }
   
   /**
    * Save the todolist in localstorage
    */
-  saveTodoList(){
+  saveTodoListLocal(){
     localStorage.setItem('todolist', JSON.stringify(this.data));
+  }
+
+  /**
+   * Load the todolist from decoded qrcode
+   * @param todolist 
+   */
+  loadTodoListQRCode(todolist:TodoListData){
+    //Clear the current todolist
+    this.removeAllItems();
+
+    //Import the new one
+    this.todoService.setItemsLabel(todolist.label);
+    todolist.items.forEach(item=>{
+      this.todoService.appendItems(item);
+    });
+
+    //Save the state in the history list
+    this.todoService.saveListInHistory();
+  }
+
+  /**
+   * Undo
+   */
+  undo(){
+    this.todoService.undo();
+  }
+
+  /**
+   * Redo
+   */
+  redo(){
+    this.todoService.redo();
+  }
+
+  /**
+   * Checks if user can undo
+   * @returns boolean
+   */
+  canUndo():boolean{
+    return this.todoService.canUndo();
+  }
+
+  /**
+   * Checks if user can redo
+   * @returns boolean
+   */
+  canRedo():boolean{
+    return this.todoService.canRedo();
   }
 
   get label(): string {

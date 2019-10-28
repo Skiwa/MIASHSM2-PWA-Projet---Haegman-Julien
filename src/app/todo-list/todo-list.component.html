@@ -52,9 +52,18 @@
       </ul>
     </div>
   </footer>
+  <!-- Delete buttons -->
   <div class="footer">
       <a class="clear-button" (click)="removeAllItems()">Tout supprimer</a>
       <a class="clear-button" (click)="removeCheckedItems()">Supprimer cochées</a>
-    </div>
+  </div>
+  <!-- Undo / Redo buttons -->
+  <div class="footer">
+      <a class="clear-button" [class.button-disabled]="!canUndo()" (click)="undo()">Undo</a>
+      <a class="clear-button" [class.button-disabled]="!canRedo()" (click)="redo()">Redo</a>
+  </div>
 </section>
 <hr/>
+
+<!-- QR code section -->
+<app-qr-code [todolist] = "data" (qrcodeUploaded)="loadTodoListQRCode($event)"></app-qr-code>
