@@ -150,15 +150,17 @@ export class TodoListComponent implements OnInit {
    * Loads the todolist in localstorage
    */
   loadTodoListLocal(){
-    let localList:TodoListData = JSON.parse(localStorage.getItem('todolist'));
-    this.todoService.setItemsLabel(localList.label);
-    localList.items.forEach(item=>{
-      this.todoService.appendItems(item);
-    });
-
-    //Save the state in the history list
-    this.todoService.saveListInHistory();
-  }
+    if(localStorage.getItem('todolist')){
+        let localList:TodoListData = JSON.parse(localStorage.getItem('todolist'));
+        this.todoService.setItemsLabel(localList.label);
+        localList.items.forEach(item=>{
+          this.todoService.appendItems(item);
+        });
+    
+        //Save the state in the history list
+        this.todoService.saveListInHistory();  
+      }
+    }
   
   /**
    * Save the todolist in localstorage
