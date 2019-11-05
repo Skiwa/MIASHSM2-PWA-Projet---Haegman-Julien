@@ -24,7 +24,7 @@ export class TodoListComponent implements OnInit {
   ngOnInit() {
 
     //Loads the stored todolist
-    this.loadTodoListLocal();
+    // this.loadTodoListLocal();
 
     //Save the initial state in the history list
     this.todoService.saveListInHistory();
@@ -36,7 +36,7 @@ export class TodoListComponent implements OnInit {
       this.titre = todolist.label;
 
       //Save the todolist in local storage
-      this.saveTodoListLocal();
+      // this.saveTodoListLocal();
     });
   }
 
