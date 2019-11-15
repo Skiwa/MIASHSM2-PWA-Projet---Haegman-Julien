@@ -86,6 +86,17 @@ export class TodoListComponent implements OnInit {
   }
 
   /**
+   * Rename an item
+   */
+  renameItem(item: TodoItemData){
+    //Rename item in the service
+    this.todoService.setItemsLabel(item.label, item);
+
+    //Save the state in the history list
+    this.todoService.saveListInHistory();
+  }
+
+  /**
    * Removes every item marked as completed
    */
   removeCheckedItems(){

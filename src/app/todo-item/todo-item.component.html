@@ -17,6 +17,7 @@
                 name    = "newTextInput"
                 class   = "edit"
                 [(ngModel)]="item.label"
+                (change)="renameAction.emit(item)"
                 (blur)="showEdit = false"
                 *ngIf="showEdit"/>
       </form>

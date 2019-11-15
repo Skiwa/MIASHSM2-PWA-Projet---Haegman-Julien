@@ -73,8 +73,7 @@ export class TodoService {
     this.todoListSubject.getValue().items.forEach(item=>{
       this.removeItems(item);
     });
-  }
-
+  }  
 
   /**
    * undo
