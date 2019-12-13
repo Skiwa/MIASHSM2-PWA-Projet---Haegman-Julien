@@ -15,8 +15,8 @@ export class TodoListComponent implements OnInit {
   @ViewChild('newTodoInput', {static:false}) todoInput:any;
 
   public data: TodoListData;      //Current list
-  private titre: String;          //Title
-  private filter:String = 'all';  //Current filter: 'all', 'actives', 'completed'
+  public titre: String;          //Title
+  public filter:String = 'all';  //Current filter: 'all', 'actives', 'completed'
 
   constructor(private todoService: TodoService) {
   }
