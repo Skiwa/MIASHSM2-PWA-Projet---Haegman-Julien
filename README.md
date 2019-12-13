@@ -14,7 +14,9 @@ Haegman Julien - M2 MIASHS WIC
     
 -   Copie de listes par QR-code
 
-## Installation et lancement
+
+## Installation et lancement
+
 
 -   Site déployé : [https://skiwa.github.io/MIASHSM2-PWA-Projet---Haegman-Julien/](https://skiwa.github.io/MIASHSM2-PWA-Projet---Haegman-Julien/)
     
