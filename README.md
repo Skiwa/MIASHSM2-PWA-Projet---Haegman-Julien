@@ -13,7 +13,6 @@ Haegman Julien - M2 MIASHS WIC
 -   Effacer Tout
     
 -   Copie de listes par QR-code
-    
 
 ## Installation et lancement
 
