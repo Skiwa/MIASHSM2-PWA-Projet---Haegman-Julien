@@ -6,9 +6,6 @@ Haegman Julien - M2 MIASHS WIC
 
 <div align="center">
   <p align="center"><img src="https://jhaegman.com/host/files/todolistimg.jpg"></p>
-  <p align="center">
-    <a href="https://nodei.co/npm/create-materialize-sass-project/"><img src="https://nodei.co/npm/create-materialize-sass-project.png"></a>
-  </p>
 </div>
 
 
