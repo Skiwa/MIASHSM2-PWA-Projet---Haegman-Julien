@@ -1,16 +1,33 @@
-# MIASHS-M2-TP3-Projet
+# MIASHS-M2-TP3-Projet
 
-## Fonctionnalités
+Haegman Julien - M2 MIASHS WIC
 
-- [x] Sérialisation / désérialisation des données localement (Local Storage) - Pour sauvegarder les données localement
-- [x] Undo / Redo (Annuler / Refaire)
-- [ ] Version responsive (application qui s'adapte aux tailles d'écran, comme un
-smartphone)
-- [x] Effacer Tout
-- [ ] Passage à une Progressive Web App (PWA) via les technologies standards
-- [ ] Utilisation de reconnaissance vocale
-- [ ] Ajout de notes de types images / vidéos / sons / dessins ...
-- [ ] Identification des utilisateurs et synchronisation des données avec FireBase
-- [x] Copie de listes par QR-code
-- [ ] Géolocalisation des choses à faire (carte google map par exemple)
-- [ ] Passage à une application hybride avec IONIC
+---
+
+## Fonctionnalités ajoutées
+
+-   Sérialisation / désérialisation des données localement (Local Storage) - Pour sauvegarder les données localement
+    
+-   Undo / Redo (Annuler / Refaire)
+    
+-   Effacer Tout
+    
+-   Copie de listes par QR-code
+    
+
+## Installation et lancement
+
+-   Site déployé : [https://skiwa.github.io/MIASHSM2-PWA-Projet---Haegman-Julien/](https://skiwa.github.io/MIASHSM2-PWA-Projet---Haegman-Julien/)
+    
+
+ou
+
+```bash
+git clone https://github.com/Skiwa/MIASHSM2-PWA-Projet---Haegman-Juliennpm installng serve
+```
+
+## Détails
+
+-   Utilisation des librairies [qrcode](https://www.npmjs.com/package/qrcode) et [qrcode-parser](https://www.npmjs.com/package/qrcode-parser) pour la génération et la lecture d'un QR-Code (au format image).
+    
+-   Tentative d'ajout de Firebase dans la branche `firebase-implementation` mais non réussi à cause d'un code trop complexe et de conflits avec le chargement en local.
