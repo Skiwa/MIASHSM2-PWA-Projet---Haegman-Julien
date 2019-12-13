@@ -5,7 +5,7 @@ Haegman Julien - M2 MIASHS WIC
 ---
 
 <div align="center">
-  <p align="center"><img src="https://jhaegman.com/host/files/todolistimg.jpg"></p>
+  <a align="center" href="https://skiwa.github.io/MIASHSM2-PWA-Projet---Haegman-Julien/"><img src="https://jhaegman.com/host/files/todolistimg.jpg"></a>
 </div>
 
 
