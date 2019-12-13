@@ -24,7 +24,9 @@ Haegman Julien - M2 MIASHS WIC
 ou
 
 ```bash
-git clone https://github.com/Skiwa/MIASHSM2-PWA-Projet---Haegman-Juliennpm installng serve
+git clone https://github.com/Skiwa/MIASHSM2-PWA-Projet---Haegman-Julien
+npm install
+ng serve
 ```
 
 ## Détails
