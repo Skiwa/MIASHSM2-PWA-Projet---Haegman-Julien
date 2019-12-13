@@ -1,4 +1,4 @@
-# MIASHS-M2-TP3-Projet
+# MIASHS-M2-TP3-Projet
 
 Haegman Julien - M2 MIASHS WIC
 
